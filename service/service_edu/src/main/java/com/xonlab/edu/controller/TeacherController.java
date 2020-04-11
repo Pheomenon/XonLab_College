@@ -1,9 +1,12 @@
 package com.xonlab.edu.controller;
 
 
-import org.springframework.web.bind.annotation.RequestMapping;
+import com.xonlab.edu.entity.Teacher;
+import com.xonlab.edu.service.TeacherService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.RestController;
+import java.util.List;
 
 /**
  * <p>
@@ -16,6 +19,21 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/edu/teacher")
 public class TeacherController {
+    @Autowired
+    private TeacherService teacherService;
+
+    @GetMapping(value = "/findAll")
+    public List<Teacher> findAllTeacher(){
+        List<Teacher> list = teacherService.list(null);
+        return list;
+    }
+
+    @DeleteMapping("/{id}")
+    public boolean removeTeacher(@PathVariable String id){
+        boolean flag = teacherService.removeById(id);
+        return flag;
+    }
+
 
 }
 
