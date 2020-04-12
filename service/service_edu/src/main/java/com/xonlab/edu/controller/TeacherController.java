@@ -29,6 +29,35 @@ public class TeacherController {
     @Autowired
     private TeacherService teacherService;
 
+    @GetMapping("/getTeacher/{id}")
+    public R getTeacher(@PathVariable String id){
+        Teacher teacher = teacherService.getById(id);
+        return R.ok().data("teacher",teacher);
+    }
+
+    @PostMapping("/updateTeacher")
+    public R updateTeacher(@RequestBody Teacher teacher){
+        boolean update = teacherService.updateById(teacher);
+        if(update){
+            return R.ok();
+        }
+        else {
+            return R.error();
+        }
+    }
+
+    //添加讲师接口的方法
+    @PostMapping("/addTeacher")
+    public R addTeacher(@RequestBody Teacher teacher){
+        boolean save = teacherService.save(teacher);
+        if(save){
+            return R.ok();
+        }
+        else {
+            return R.error();
+        }
+    }
+
     @GetMapping(value = "/findAll")
     public R findAllTeacher(){
         List<Teacher> list = teacherService.list(null);
