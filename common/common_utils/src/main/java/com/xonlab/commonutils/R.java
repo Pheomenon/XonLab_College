@@ -41,6 +41,7 @@ public class R {
         r.setMessage("失败");
         return r;
     }
+
     public R success(Boolean success){
         this.setSuccess(success);
         return this;

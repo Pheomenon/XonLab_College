@@ -23,8 +23,9 @@ import java.util.Map;
  * @author gao
  * @since 2020-04-11
  */
+@CrossOrigin
 @RestController
-@RequestMapping("/edu/teacher")
+@RequestMapping("/eduservice/teacher")
 public class TeacherController {
     @Autowired
     private TeacherService teacherService;
@@ -103,6 +104,7 @@ public class TeacherController {
 
         //构建条件
         QueryWrapper<Teacher> wrapper = new QueryWrapper<>();
+
         String name = teacherQuery.getName();
         Integer level = teacherQuery.getLevel();
         String begin = teacherQuery.getBegin();
@@ -117,9 +119,11 @@ public class TeacherController {
         if(!StringUtils.isEmpty(begin)){
             wrapper.gt("gmt_create",begin);
         }
-        if(!StringUtils.isEmpty(level)){
+        if(!StringUtils.isEmpty(end)){
             wrapper.le("gmt_create",end);
         }
+        //排序
+        wrapper.orderByDesc("gmt_create");
         //分页查询
         teacherService.page(teacherPage,wrapper);
         long total = teacherPage.getTotal();
@@ -129,6 +133,5 @@ public class TeacherController {
         map.put("rows",records);
         return R.ok().data(map);
     }
-
 }
 
