@@ -1,21 +1,20 @@
-package com.xonlab.edu;
+package com.xonlab.vod;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.ComponentScan;
 
 /**
  * @Author:Gao
- * @Date:2020-04-11 14:30
+ * @Date:2020-04-27 10:46
  */
-@SpringBootApplication
 @EnableDiscoveryClient
-@EnableFeignClients
+@SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
 @ComponentScan(basePackages = {"com.xonlab"})
-public class EduApplication {
+public class VodApplication {
     public static void main(String[] args) {
-        SpringApplication.run(EduApplication.class,args);
+        SpringApplication.run(VodApplication.class, args);
     }
 }

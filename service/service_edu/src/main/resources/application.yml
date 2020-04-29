@@ -4,6 +4,10 @@ server:
 spring:
   application:
     name: service-edu
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
   profiles:
     active: dev
   datasource:
@@ -14,6 +18,18 @@ spring:
   jackson:
     time-zone: GMT+8
     date-format: yyyy-MM-dd HH:mm:ss
+
+feign:
+  hystrix:
+    enabled: true
+  # 设置hystrix超时时间，默认1000ms
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 6000
 
 mybatis-plus:
   mapper-locations: classpath:com/xonlab/edu/mapper/xml/*.xml
