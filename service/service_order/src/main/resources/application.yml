@@ -1,0 +1,35 @@
+server:
+  port: 8007
+
+spring:
+  application:
+    name: service-order
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+  profiles:
+    active: dev
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3306/college?serverTimezone=GMT%2B8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+
+feign:
+  hystrix:
+    enabled: true
+  # 设置hystrix超时时间，默认1000ms
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 6000
+
+mybatis-plus:
+  mapper-locations: classpath:com/xonlab/eduorder/mapper/xml/*.xml

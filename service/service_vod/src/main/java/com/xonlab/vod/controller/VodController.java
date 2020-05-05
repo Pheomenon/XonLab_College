@@ -2,6 +2,8 @@ package com.xonlab.vod.controller;
 
 import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.vod.model.v20170321.DeleteVideoRequest;
+import com.aliyuncs.vod.model.v20170321.GetVideoPlayAuthRequest;
+import com.aliyuncs.vod.model.v20170321.GetVideoPlayAuthResponse;
 import com.xonlab.commonutils.R;
 import com.xonlab.vod.service.VodService;
 import com.xonlab.vod.utils.ConstantVod;
@@ -44,11 +46,26 @@ public class VodController {
             throw new RuntimeException();
         }
     }
+    
     //批量删除阿里视频
     @DeleteMapping("delete-batch")
     public R deleteBatch(@RequestParam("videoList") List<String> videoList){
         vodService.removeAllAliVod(videoList);
-
         return R.ok();
+    }
+    
+    //根据视频id获取凭证
+    @GetMapping("/getPlayAuth/{id}")
+    public R getPlayAuth(@PathVariable String id){
+        try {
+            DefaultAcsClient client = InitVodClient.initVodClient(ConstantVod.ACCESS_KEY_ID, ConstantVod.ACCESS_KEY_SECRET);
+            GetVideoPlayAuthRequest request = new GetVideoPlayAuthRequest();
+            request.setVideoId(id);
+            GetVideoPlayAuthResponse response = client.getAcsResponse(request);
+            String playAuth = response.getPlayAuth();
+            return R.ok().data("playAuth",playAuth);
+        }catch (Exception e){
+            throw new RuntimeException("获取凭证失败");
+        }
     }
 }

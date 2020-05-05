@@ -2,15 +2,15 @@ package com.xonlab.edu.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.xonlab.commonutils.R;
+import com.xonlab.commonutils.ordervo.CourseWebVoOrder;
 import com.xonlab.edu.entity.Course;
 import com.xonlab.edu.entity.Teacher;
+import com.xonlab.edu.entity.frontvo.CourseWebVo;
 import com.xonlab.edu.service.CourseService;
 import com.xonlab.edu.service.TeacherService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
