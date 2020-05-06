@@ -29,7 +29,7 @@ public class MsmController {
     //发送短信
     @GetMapping("/send/{phone}")
     public R sendMsm(@PathVariable String phone){
-        String code = redisTemplate.opsForValue().get("phone");
+        String code = redisTemplate.opsForValue().get(phone);
         if(!StringUtils.isEmpty(code)){
             return R.ok();
         }
