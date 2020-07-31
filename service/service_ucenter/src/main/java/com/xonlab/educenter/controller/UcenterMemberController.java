@@ -47,6 +47,7 @@ public class UcenterMemberController {
         UcenterMember member = memberService.getById(memberId);
         return R.ok().data("userInfo",member);
     }
+
     //根据用户id获取信息
     @PostMapping("/getUserInfo/{id}")
     public UcenterMemberOrder getUserInfo(@PathVariable String id){
